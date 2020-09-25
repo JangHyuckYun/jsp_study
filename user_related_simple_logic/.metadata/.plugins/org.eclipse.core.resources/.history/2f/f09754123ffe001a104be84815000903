@@ -1,0 +1,123 @@
+package kr.list.member.dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import kr.list.member.vo.memberVO;
+import kr.list.utility.DBConnector;
+
+public class memberDAO {
+	Connection conn = null;
+	PreparedStatement stmt = null;
+	ResultSet rs = null;
+	
+	private static String getKey() {
+		String key = "test";
+		
+		return key;
+	}
+
+	public memberVO login(memberVO vo) {
+		memberVO member = null;
+		try {
+			conn = DBConnector.getConnector();
+
+			String sql = "SELECT * FROM test_table2 WHERE BINARY id = ? AND pw = ?";
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, vo.getId());
+			stmt.setString(2, vo.getPw());
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				member = new memberVO();
+				Date dates = rs.getDate("dates");
+				member.setId(rs.getString("id"));
+				member.setPw(rs.getString("pw"));
+				member.setName(rs.getString("name"));
+				member.setDates(dates);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnector.close(rs, stmt, conn);
+		}
+
+		return member;
+	}
+
+	public ArrayList<String[]> userList() {
+		List<String[]> list = new ArrayList<>();
+
+		try {
+			conn = DBConnector.getConnector();
+
+			String sql = "SELECT * FROM test_table2";
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+			String[] arr = null;
+			while (rs.next()) {
+				arr = new String[4];
+				arr[0] = rs.getString("id");
+				arr[2] = rs.getString("pw");
+				arr[1] = rs.getString("name");
+				arr[3] = rs.getString("dates");
+
+				list.add(arr);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnector.close(rs, stmt, conn);
+		}
+
+		return (ArrayList<String[]>) list;
+	}
+	
+	public int modifyUser(memberVO vo) {
+		int i = -10;
+		try {
+			conn = DBConnector.getConnector();
+			
+			String sql = "UPDATE test_table2 SET id = ?, pw = ?, name = ? WHERE id = ?";
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, vo.getId());
+			stmt.setString(2, vo.getPw());
+			stmt.setString(3, vo.getName());
+			stmt.setString(4, vo.getId());
+			
+			 i = stmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConnector.close(rs, stmt, conn);
+		}
+		
+		return i;
+	}
+	
+	public void RemoveUser(String id) {
+		try {
+			conn = DBConnector.getConnector();
+			
+			String sql = "DELETE FROM test_table2 WHERE id = ?";
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, id);
+			
+			stmt.execute();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConnector.close(rs, stmt, conn);
+		}
+	}
+
+}
