@@ -1,0 +1,24 @@
+{
+  "ecmaVersion": 6,
+  "plugins": {
+    "guess-types": {
+      
+    },
+    "outline": {
+      
+    },
+    "jscs": {
+      
+    },
+    "jshint": {
+      
+    },
+    "ckeditor4.4.x": {
+      
+    }
+  },
+  "libs": [
+    "browser",
+    "jquery"
+  ]
+}

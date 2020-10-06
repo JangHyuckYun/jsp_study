@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.servlet_test2.mappers.memberMapper">
+
+	<select id="login" resultType="memberVO">
+        SELECT idx, id, pw, name, dates FROM users WHERE id = #{id}
+    </select>
+    
+    <select id="login2" resultType="memberVO">
+        SELECT idx, id, name, dates FROM users WHERE id = #{id} AND pw = #{pw}
+    </select>
+    
+    
+    <select id="allMember" resultType="memberVO">
+        SELECT idx, id, name, dates FROM users
+    </select>
+    
+     <select id="selectMember" resultType="memberVO">
+        SELECT idx, id, name, dates FROM users WHERE #{value} IN (idx, id, name, dates)
+    </select>
+    
+     <select id="getUserData" resultType="memberVO">
+        SELECT * FROM users WHERE idx = #{idx}
+    </select>
+    
+    <insert id="joinAction">
+    	INSERT INTO users SET id = #{id}, pw = #{pw}, name = #{name}, dates = NOW()
+    </insert>
+    
+    <update id="updateUserData">
+    	UPDATE users SET id = #{id}, pw = #{pw}, name = #{name} WHERE idx = #{idx}
+    </update>
+    
+    <update id="deleteUserData">
+    	DELETE FROM users WHERE idx = #{idx}
+    </update>
+    
+</mapper>

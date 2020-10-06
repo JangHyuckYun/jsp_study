@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    color: #333;
+    text-decoration: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+section {
+    width: 100%;
+}
+
+.rel {
+    position: relative
+}
+
+.ab {
+    position: absolute;
+}
+.flex {
+    display: flex;
+}
+.align {
+    align-items: center;
+}
+.center {
+    justify-content: center;
+}
+.cover {
+    width: 1140px;
+    margin: 0 auto;
+    height: 100%;
+}
+section.search{
+    margin-top: 70px;
+    height: 40px;
+}
+section.search button {
+    width: 100px;
+    height: 40px;
+    margin:0px 10px;
+}
+section.uesr_list {
+    margin-top: 50px;
+    text-align: center;
+}
+td span {
+    color:#6898d8;
+    cursor: pointer;
+}
+
+.logoutButton {
+	position:absolute;
+	right:15px;
+	top:15px;
+}
