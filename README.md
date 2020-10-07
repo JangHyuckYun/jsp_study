@@ -10,3 +10,9 @@
 
 ## user_related_simple_logic2
 ### - 위의 기능과 동일하나 spring 문법으로 다시 제작
+
+## 김민성
+
+바보
+멍청이
+말미잘
